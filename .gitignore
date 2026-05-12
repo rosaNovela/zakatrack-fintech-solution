@@ -1,6 +1,17 @@
+# General
+.idea/
+.vscode/
 *.log
 
+# Java/Maven
+**/target/
+**/build/
+.mvn/
 
+# Node/React
+**/node_modules/
+**/dist/
+.env
 
 # Infrastructure
 .terraform/
