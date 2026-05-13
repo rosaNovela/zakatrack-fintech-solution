@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # The Database Engine
+  db:
+    image: postgres:15
+    container_name: zakatrack-db
+    environment:
+      POSTGRES_USER: rosa_dev
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: zakatrack_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # The Database Management Tool (pgAdmin)
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: zakatrack-admin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: rosa@zakatrack.com
+      PGADMIN_DEFAULT_PASSWORD: password123
+    ports:
+      - "5050:80" # This means you go to http://localhost:5050 in your browser
+    depends_on:
+      - db
+
+# This ensures your data doesn't vanish when you stop the container
+volumes:
+  postgres_data:

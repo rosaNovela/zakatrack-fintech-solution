@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:15
+    container_name: zakatrack-db
+    environment:
+      POSTGRES_DB: zakatrack_db
+      POSTGRES_PASSWORD: yourpassword
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./zakatrack-backend
+    container_name: zakatrack-api
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/zakatrack_db
+      SPRING_DATASOURCE_PASSWORD: yourpassword
